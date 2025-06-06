@@ -2,11 +2,12 @@
 
 import { DomainInvalidValueException } from "../exceptions/Domain-invalid-values.exception";
 import { Email } from "../value-objects/Email";
+import { Password } from "../value-objects/Password";
 import { Entity } from "./Entity";
 type UserProps = {
     name: string;
     email: Email;
-    password: string;
+    password: Password;
     created_at?: Date;
 }
 
