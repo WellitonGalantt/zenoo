@@ -1,4 +1,4 @@
 export interface HashProvider {
-    encrypt(rawPassword: string): string
-    verifyHash(hashedPassword: string, rawPassword: string): boolean
+    encrypt(rawPassword: string): Promise<string>;
+    verifyHash(hashedPassword: string, rawPassword: string): Promise<boolean>;
 }

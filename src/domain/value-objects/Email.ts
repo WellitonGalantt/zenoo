@@ -1,17 +1,15 @@
-import { DomainInvalidValueException } from "../exceptions/Domain-invalid-values.exception";
-
+import { DomainInvalidValueException } from '../exceptions/Domain-invalid-values.exception';
 
 export class Email {
-    private readonly email: string
+    private readonly email: string;
 
     private constructor(email: string) {
         this.email = email;
     }
 
     public static create(email: string): Email {
-
         if (!this.validate(email)) {
-            throw new DomainInvalidValueException("Formato de email invalido!!");
+            throw new DomainInvalidValueException('Formato de email invalido!!');
         }
 
         return new Email(email);

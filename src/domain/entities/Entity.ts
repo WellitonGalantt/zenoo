@@ -4,7 +4,7 @@ export abstract class Entity<Props> {
 
     protected constructor(props: Props, id?: number) {
         this.id = id;
-        this.props = props
+        this.props = props;
     }
 
     get _id(): number | undefined {
@@ -28,5 +28,4 @@ export abstract class Entity<Props> {
 
         return this.id === objetct.id;
     }
-
 }
