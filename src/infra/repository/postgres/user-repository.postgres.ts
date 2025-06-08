@@ -19,6 +19,8 @@ export class IUserRerpository implements UserRepository {
     public async findByEmail(email: string): Promise<UserEntity | null> {
         const query = 'SELECT * FROM users WHERE email = $1'
 
+        console.log('findByEmail:   ' + email);
+
         // Faz a busca no banco de dados passado uma tipagem do dado especifico;
         const result = await db.query<UserDataRow>(query, [email]);
 
@@ -35,10 +37,12 @@ export class IUserRerpository implements UserRepository {
 
     public async save(entity: UserEntity): Promise<UserEntity> {
 
+        console.log('SAVE:   ' + [entity.name, entity.email.email, entity.password.password]);
+
         const query = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *';
 
         const result = await db.query<UserDataRow>(query, [entity.name, entity.email.email, entity.password.password]);
-        
+
         return UserMapper.toDomain(result.rows[0]);
     }
 }

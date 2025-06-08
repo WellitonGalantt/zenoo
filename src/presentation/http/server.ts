@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use(morgan('dev'));
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.send(error.message);

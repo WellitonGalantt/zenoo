@@ -41,7 +41,7 @@ export class UserEntity extends Entity<UserProps> {
     }
 
     get password(): Password {
-        return this.password;
+        return this.props.password;
     }
 
     get createdAt(): Date {

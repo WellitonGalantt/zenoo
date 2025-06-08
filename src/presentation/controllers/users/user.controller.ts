@@ -29,8 +29,10 @@ export class UserController {
             )
     
             res.status(201).json(createUserId);
+            return;
 
         } catch (error) {
+            console.log("Controller Error: " + error)
             res.status(500).json({ message: `Internal server error: ${error}` });
             return;
         }

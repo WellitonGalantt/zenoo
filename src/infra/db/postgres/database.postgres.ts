@@ -31,5 +31,9 @@ pool.on('error', (err, client) => {
 // Facilitando a mudanca de banco de dados de preciso
 export const db = {
     // Usando o extends para receber um type valido, ele nao aceita qualquer type.
-    query: <T extends QueryResultRow>(text: string, params?: any[]) => pool.query<T>(text, params),
+    query: <T extends QueryResultRow>(text: string, params?: any[]) => {
+        console.log(params);
+        return pool.query<T>(text, params)
+    },
+    end: () => pool.end()
 };
