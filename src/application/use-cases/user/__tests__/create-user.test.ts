@@ -1,4 +1,5 @@
 import { UserEntity } from '../../../../domain/entities/User.entity';
+import { DomainInvalidValueException } from '../../../../domain/exceptions/Domain-invalid-values.exception';
 import { Email } from '../../../../domain/value-objects/Email';
 import { Password } from '../../../../domain/value-objects/Password';
 import { HashProvider } from '../../../providers/hash.provider';
@@ -55,4 +56,29 @@ describe('Create user usecase tests', () => {
         //O expect.any fala que ele deve receber qualquer valores desde q a instancia seja da entidade especifica;
         expect(mockUserRepository.save).toHaveBeenCalledWith(expect.any(UserEntity));
     });
+
+    it('Email already regitred error.', () => {
+
+        const input = {
+            name: 'wellton',
+            email: 'wellton@gmail.com',
+            password: 'senhaTop123',
+            confirm_password: 'senhaTop123',
+        }
+
+        const userEntity = UserEntity.create({
+            name: input.name,
+            email: Email.create('wellton@gmail.com'),
+            password: Password.create('dmaw324@3abhdsygu21897323ty26'),
+        }, 1)
+
+        mockUserRepository.findByEmail.mockResolvedValue(
+            userEntity
+        )
+
+        // Rejeição com a instancia do erro;
+        expect(createUserUC.execute(input)).rejects.toBeInstanceOf(DomainInvalidValueException);
+        //Verifica se nao foi chamada, se o sitema parou onde deveria;
+        expect(mockUserRepository.save).not.toHaveBeenCalled();
+    })
 });

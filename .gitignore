@@ -1,5 +1,9 @@
 .env
-/build
+/dist
 /node_modules
 .prettierrc.json
 .eslintrc.json
+
+coverage/
+.jest-cache
+

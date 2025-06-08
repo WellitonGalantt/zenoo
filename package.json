@@ -2,13 +2,14 @@
   "name": "zenoo",
   "version": "1.0.0",
   "description": "",
-  "main": "main.ts",
+  "main": "dist/main.js",
   "scripts": {
     "test": "jest",
     "dev": "npx nodemon",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "format": "prettier --write \"**/*.ts\""
+    "format": "prettier --write \"**/*.ts\"",
+    "migrate": "node-pg-migrate"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +33,7 @@
     "@types/helmet": "^0.0.48",
     "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.9",
+    "@types/morgan": "^1.9.10",
     "@types/pg": "^8.15.4",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
@@ -39,6 +41,7 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
     "jest": "^29.7.0",
+    "node-pg-migrate": "^8.0.2",
     "prettier": "^3.5.3",
     "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",

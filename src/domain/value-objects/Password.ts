@@ -1,7 +1,7 @@
 import { DomainInvalidValueException } from '../exceptions/Domain-invalid-values.exception';
 import { HashProvider } from '../../application/providers/hash.provider';
 export class Password {
-    private readonly password: string;
+    public readonly password: string;
 
     private constructor(password: string) {
         this.password = password;

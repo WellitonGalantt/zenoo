@@ -1,7 +1,8 @@
 import { DomainInvalidValueException } from '../exceptions/Domain-invalid-values.exception';
 
 export class Email {
-    private readonly email: string;
+    //Trocanmdo para public para poder acessar no repositorio que precisa do valor raiz/primitivo;
+    public readonly email: string;
 
     private constructor(email: string) {
         this.email = email;

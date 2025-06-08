@@ -40,6 +40,10 @@ export class UserEntity extends Entity<UserProps> {
         return this.props.email;
     }
 
+    get password(): Password {
+        return this.password;
+    }
+
     get createdAt(): Date {
         return this.props.created_at!;
     }
