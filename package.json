@@ -10,8 +10,8 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write \"**/*.ts\"",
     "migrate": "node-pg-migrate",
-    "start": "./dist/src/main.js",
-    "build": "tsx tsc"
+    "start": "node ./dist/main.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
