@@ -1,6 +1,6 @@
 // Configuracao do banco de dados
-import { Pool, PoolConfig, QueryResultRow } from "pg"
-import dotenv from "dotenv";
+import { Pool, PoolConfig, QueryResultRow } from 'pg';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -12,18 +12,18 @@ const dbconfig: PoolConfig = {
     port: Number(process.env.PGPORT),
     max: 20, // Número máximo de clientes no pool
     idleTimeoutMillis: 30000, // Tempo em ms que um cliente pode ficar ocioso
-}
+};
 
 const pool = new Pool(dbconfig);
 
 pool.on('connect', () => {
-    console.log("Conetado com postgresSQL!");
-})
+    console.log('Conetado com postgresSQL!');
+});
 
 pool.on('error', (err, client) => {
-    console.log("Erro ao conectar com postgresSQL!" + err);
+    console.log('Erro ao conectar com postgresSQL!' + err);
     process.exit(-1);
-})
+});
 
 // Exportando a funcao do banco de dados de forma encapsulada/abstrata;
 // Quando quero fazer uma comunicação com o banco de dados nao usamos o pool diretamente, o que da mais seguranca
@@ -32,8 +32,7 @@ pool.on('error', (err, client) => {
 export const db = {
     // Usando o extends para receber um type valido, ele nao aceita qualquer type.
     query: <T extends QueryResultRow>(text: string, params?: any[]) => {
-        console.log(params);
-        return pool.query<T>(text, params)
+        return pool.query<T>(text, params);
     },
-    end: () => pool.end()
+    end: () => pool.end(),
 };

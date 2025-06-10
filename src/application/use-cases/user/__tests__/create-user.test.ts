@@ -1,4 +1,4 @@
-import { UserEntity } from '../../../../domain/entities/User.entity';
+import { UserEntity } from '../../../../domain/entities/users/User.entity';
 import { DomainInvalidValueException } from '../../../../domain/exceptions/Domain-invalid-values.exception';
 import { Email } from '../../../../domain/value-objects/Email';
 import { Password } from '../../../../domain/value-objects/Password';
@@ -38,11 +38,14 @@ describe('Create user usecase tests', () => {
         mockUserRepository.findByEmail.mockResolvedValue(null);
         mockHashProvider.encrypt.mockResolvedValue('dmaw324@3abhdsygu21897323ty26');
         mockUserRepository.save.mockResolvedValue(
-            UserEntity.create({
-                name: input.name,
-                email: Email.create('wellton@gmail.com'),
-                password: Password.create('dmaw324@3abhdsygu21897323ty26'),
-            }, 1),
+            UserEntity.create(
+                {
+                    name: input.name,
+                    email: Email.create('wellton@gmail.com'),
+                    password: Password.create('dmaw324@3abhdsygu21897323ty26'),
+                },
+                1,
+            ),
         );
 
         const output = await createUserUC.execute(input);
@@ -58,27 +61,27 @@ describe('Create user usecase tests', () => {
     });
 
     it('Email already regitred error.', () => {
-
         const input = {
             name: 'wellton',
             email: 'wellton@gmail.com',
             password: 'senhaTop123',
             confirm_password: 'senhaTop123',
-        }
+        };
 
-        const userEntity = UserEntity.create({
-            name: input.name,
-            email: Email.create('wellton@gmail.com'),
-            password: Password.create('dmaw324@3abhdsygu21897323ty26'),
-        }, 1)
+        const userEntity = UserEntity.create(
+            {
+                name: input.name,
+                email: Email.create('wellton@gmail.com'),
+                password: Password.create('dmaw324@3abhdsygu21897323ty26'),
+            },
+            1,
+        );
 
-        mockUserRepository.findByEmail.mockResolvedValue(
-            userEntity
-        )
+        mockUserRepository.findByEmail.mockResolvedValue(userEntity);
 
         // Rejeição com a instancia do erro;
         expect(createUserUC.execute(input)).rejects.toBeInstanceOf(DomainInvalidValueException);
         //Verifica se nao foi chamada, se o sitema parou onde deveria;
         expect(mockUserRepository.save).not.toHaveBeenCalled();
-    })
+    });
 });

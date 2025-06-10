@@ -1,9 +1,8 @@
-import { Router } from "express";
-import { UserController } from "../../../controllers/users/user.controller";
-import { IUserRerpository } from "../../../../infra/repository/postgres/user-repository.postgres";
-import { IHashProvider } from "../../../../infra/providers/bcrypt/hash.provider";
-import { CreateUserUC } from "../../../../application/use-cases/user/create-user.uc";
-
+import { Router } from 'express';
+import { UserController } from '../../../controllers/users/user.controller';
+import { IUserRerpository } from '../../../../infra/repository/postgres/user-repository.postgres';
+import { IHashProvider } from '../../../../infra/providers/bcrypt/hash.provider';
+import { CreateUserUC } from '../../../../application/use-cases/user/create-user.uc';
 
 const userRouter = Router();
 

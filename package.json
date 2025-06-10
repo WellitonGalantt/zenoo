@@ -5,11 +5,13 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "jest",
-    "dev": "npx nodemon",
+    "dev": "npx nodemon src/main.ts watch 'src/' -e ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write \"**/*.ts\"",
-    "migrate": "node-pg-migrate"
+    "migrate": "node-pg-migrate",
+    "start": "./dist/src/main.js",
+    "build": "tsx tsc"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
-import { HashProvider } from "../../../application/providers/hash.provider";
-import bcrypt from "bcrypt";
+import { HashProvider } from '../../../application/providers/hash.provider';
+import bcrypt from 'bcrypt';
 
 export class IHashProvider implements HashProvider {
     private readonly saltRounds: number = 8;

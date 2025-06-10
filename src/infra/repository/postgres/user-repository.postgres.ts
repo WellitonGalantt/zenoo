@@ -1,9 +1,9 @@
 //Implementacao do UserRepository
 
-import { UserRepository } from "../../../application/repositories/user.repository";
-import { UserEntity } from "../../../domain/entities/User.entity";
-import { db } from "../../db/postgres/database.postgres";
-import { UserMapper } from "./mappers/user-repository.mapper";
+import { UserRepository } from '../../../application/repositories/user.repository';
+import { UserEntity } from '../../../domain/entities/users/User.entity';
+import { db } from '../../db/postgres/database.postgres';
+import { UserMapper } from './mappers/user-repository.mapper';
 
 //Dados que vem do banco de dados
 export type UserDataRow = {
@@ -15,17 +15,14 @@ export type UserDataRow = {
 };
 
 export class IUserRerpository implements UserRepository {
-
     public async findByEmail(email: string): Promise<UserEntity | null> {
-        const query = 'SELECT * FROM users WHERE email = $1'
-
-        console.log('findByEmail:   ' + email);
+        const query = 'SELECT * FROM users WHERE email = $1';
 
         // Faz a busca no banco de dados passado uma tipagem do dado especifico;
         const result = await db.query<UserDataRow>(query, [email]);
 
         if (result.rows.length === 0) {
-            return null
+            return null;
         }
 
         const userRow = result.rows[0];
@@ -36,8 +33,6 @@ export class IUserRerpository implements UserRepository {
     }
 
     public async save(entity: UserEntity): Promise<UserEntity> {
-
-        console.log('SAVE:   ' + [entity.name, entity.email.email, entity.password.password]);
 
         const query = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *';
 

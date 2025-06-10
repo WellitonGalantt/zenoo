@@ -1,4 +1,4 @@
-import { UserEntity } from '../../../domain/entities/User.entity';
+import { UserEntity } from '../../../domain/entities/users/User.entity';
 import { DomainInvalidValueException } from '../../../domain/exceptions/Domain-invalid-values.exception';
 import { Email } from '../../../domain/value-objects/Email';
 import { Password } from '../../../domain/value-objects/Password';
