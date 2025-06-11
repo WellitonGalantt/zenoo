@@ -1,6 +1,6 @@
 // Entidade para usuario
 
-import { DomainInvalidValueException } from '../../exceptions/Domain-invalid-values.exception';
+import { DomainInvalidValueException } from '../../exceptions/domainfixexception';
 import { Email } from '../../value-objects/Email';
 import { Password } from '../../value-objects/Password';
 import { Entity } from '../Entity';

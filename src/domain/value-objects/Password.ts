@@ -1,4 +1,4 @@
-import { DomainInvalidValueException } from '../exceptions/Domain-invalid-values.exception';
+import { DomainInvalidValueException } from '../exceptions/domainfixexception';
 import { HashProvider } from '../../application/providers/hash.provider';
 export class Password {
     public readonly password: string;
