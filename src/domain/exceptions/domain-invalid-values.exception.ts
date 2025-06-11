@@ -4,3 +4,5 @@ export class DomainInvalidValueException extends Error {
         this.name = 'DomainInvalidValueException';
     }
 }
+// Domain-invalid-values.exception.ts
+// Domain-invalid-values.exception
