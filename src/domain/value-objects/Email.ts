@@ -1,4 +1,4 @@
-import { DomainInvalidValueException } from '../exceptions/domainfixexception';
+import { DomainInvalidValueException } from '../exceptions/Domain-invalid-values.exception';
 
 export class Email {
     //Trocanmdo para public para poder acessar no repositorio que precisa do valor raiz/primitivo;
