@@ -33,7 +33,6 @@ export class IUserRerpository implements UserRepository {
     }
 
     public async save(entity: UserEntity): Promise<UserEntity> {
-
         const query = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *';
 
         const result = await db.query<UserDataRow>(query, [entity.name, entity.email.email, entity.password.password]);

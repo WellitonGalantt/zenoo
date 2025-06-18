@@ -27,8 +27,7 @@ describe('User routes tests', () => {
         expect(response.body).not.toHaveProperty('password');
     });
 
-    it('POST /users/ : Failed invalid email error test', async ()=>{
-
+    it('POST /users/ : Failed invalid email error test', async () => {
         const userData = {
             name: 'Welliton',
             email: 'wellitongmail.com',
@@ -42,9 +41,9 @@ describe('User routes tests', () => {
         expect(response.body).toHaveProperty('message');
         expect(response.body).not.toHaveProperty('id');
         expect(response.body).not.toHaveProperty('password');
-    })
+    });
 
-    it('POST /users/ : Failed password test does not match', async ()=>{
+    it('POST /users/ : Failed password test does not match', async () => {
         const userData = {
             name: 'Welliton',
             email: 'welliton@gmail.com',
@@ -58,5 +57,19 @@ describe('User routes tests', () => {
         expect(response.body).toHaveProperty('message');
         expect(response.body).not.toHaveProperty('id');
         expect(response.body).not.toHaveProperty('password');
-    })
+    });
+
+    it('POST /users/login : Sucessful ongin user', async () => {
+        const userData = {
+            email: 'welliton@gmail.com',
+            password: 'senhatop123',
+        };
+
+        const response = await request(app).post('/users/login').send(userData);
+
+        expect(response.status).toBe(500);
+        expect(response.body).toHaveProperty('message');
+        expect(response.body).not.toHaveProperty('id');
+        expect(response.body).not.toHaveProperty('password');
+    });
 });

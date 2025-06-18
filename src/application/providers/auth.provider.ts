@@ -1,4 +1,6 @@
+import { JwtPayload } from "jsonwebtoken";
+
 export interface AuthProvider {
-    gerenate(userId:number, role:string): string;
-    validate(token: string): string;
+    generateToken(userId: number, role: string): string;
+    validate(token: string): JwtPayload;
 }

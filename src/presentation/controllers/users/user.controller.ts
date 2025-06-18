@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateUserUC } from '../../../application/use-cases/user/create-user.uc';
+import { LoginUserInputDto, LoginUserOutputDto, LoginUserUC } from '../../../application/use-cases/user/login-user-uc.';
 
 type ReqBodyData = {
     name: string;
@@ -11,7 +12,8 @@ type ReqBodyData = {
 export class UserController {
     constructor(
         private readonly createUserUseCase: CreateUserUC, //Automaticamnete ja faz a atribuicao dos atributos sem precisar do this.
-    ) {}
+        private readonly loginUserUseCase: LoginUserUC
+    ) { }
 
     public async create(req: Request<{}, ReqBodyData>, res: Response): Promise<void> {
         try {
@@ -30,5 +32,20 @@ export class UserController {
             res.status(500).json({ message: `Internal server error: ${error}` });
             return;
         }
+    }
+
+    public async userLogin(req: Request<{}, LoginUserInputDto>, res: Response): Promise<void> {
+        try {
+            const body = req.body;
+            const result = await this.loginUserUseCase.execute(body);
+
+            res.status(201).json(result);
+            return;
+        }
+        catch (error) {
+            res.status(500).json({ message: `internal server error: ${error}` });
+            return;
+        }
+
     }
 }

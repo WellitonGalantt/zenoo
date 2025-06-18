@@ -1,5 +1,6 @@
 // Entidade para usuario
 
+import { HashProvider } from '../../../application/providers/hash.provider';
 import { DomainInvalidValueException } from '../../exceptions/Domain-invalid-values.exception';
 import { Email } from '../../value-objects/Email';
 import { Password } from '../../value-objects/Password';
@@ -52,5 +53,9 @@ export class UserEntity extends Entity<UserProps> {
         if (newName.length <= 3) throw new DomainInvalidValueException('Nome deve ser maior que 3 caracteres!');
 
         this.props.name = newName;
+    }
+
+    public async verifyValidPassword(rawPassword: string, hashProvider: HashProvider): Promise<boolean> {
+        return await hashProvider.verifyHash(this.password.password, rawPassword);
     }
 }
