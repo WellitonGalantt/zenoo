@@ -1,7 +1,7 @@
 import { UserEntity } from '../../../domain/entities/users/User.entity';
 import { DomainInvalidValueException } from '../../../domain/exceptions/Domain-invalid-values.exception';
-import { Email } from '../../../domain/value-objects/Email';
-import { Password } from '../../../domain/value-objects/Password';
+import { Email } from '../../../domain/value-objects/Email.vo';
+import { Password } from '../../../domain/value-objects/Password.vo';
 import { HashProvider } from '../../providers/hash.provider';
 import { UserRepository } from '../../repositories/user.repository';
 import { UseCaseContract } from '../use-case.contract';

@@ -12,8 +12,8 @@ type ReqBodyData = {
 export class UserController {
     constructor(
         private readonly createUserUseCase: CreateUserUC, //Automaticamnete ja faz a atribuicao dos atributos sem precisar do this.
-        private readonly loginUserUseCase: LoginUserUC
-    ) { }
+        private readonly loginUserUseCase: LoginUserUC,
+    ) {}
 
     public async create(req: Request<{}, ReqBodyData>, res: Response): Promise<void> {
         try {
@@ -41,11 +41,9 @@ export class UserController {
 
             res.status(201).json(result);
             return;
-        }
-        catch (error) {
+        } catch (error) {
             res.status(500).json({ message: `internal server error: ${error}` });
             return;
         }
-
     }
 }

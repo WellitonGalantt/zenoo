@@ -1,6 +1,6 @@
 import { UserEntity } from '../../../../domain/entities/users/User.entity';
-import { Email } from '../../../../domain/value-objects/Email';
-import { Password } from '../../../../domain/value-objects/Password';
+import { Email } from '../../../../domain/value-objects/Email.vo';
+import { Password } from '../../../../domain/value-objects/Password.vo';
 import { UserDataRow } from '../user-repository.postgres';
 
 // Faz um mapeamento dos dados chegos do banco de dados para um entidade

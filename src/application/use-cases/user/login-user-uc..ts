@@ -25,7 +25,7 @@ export class LoginUserUC implements UseCaseContract<LoginUserInputDto, LoginUser
         private readonly authProvider: AuthProvider,
         private readonly userRepository: UserRepository,
         private readonly hashProvider: HashProvider,
-    ) { }
+    ) {}
 
     public static create(
         authProvider: AuthProvider,

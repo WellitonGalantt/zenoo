@@ -14,7 +14,7 @@ describe('Create user usecase tests', () => {
     //Acoes antes do teste
     beforeEach(() => {
         jest.clearAllMocks();
-        
+
         mockUserRepository = {
             save: jest.fn(), // Diz que é um funcao especial do jest, uma função falsa
             findByEmail: jest.fn(),

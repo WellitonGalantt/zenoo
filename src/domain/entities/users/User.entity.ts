@@ -2,8 +2,8 @@
 
 import { HashProvider } from '../../../application/providers/hash.provider';
 import { DomainInvalidValueException } from '../../exceptions/Domain-invalid-values.exception';
-import { Email } from '../../value-objects/Email';
-import { Password } from '../../value-objects/Password';
+import { Email } from '../../value-objects/Email.vo';
+import { Password } from '../../value-objects/Password.vo';
 import { Entity } from '../Entity';
 type UserProps = {
     name: string;
