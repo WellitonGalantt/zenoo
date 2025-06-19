@@ -32,6 +32,21 @@ export class IUserRerpository implements UserRepository {
         return entity;
     }
 
+    public async findById(id: number): Promise<UserEntity | null> {
+        const query = 'SELECT * FROM users WHERE id = $1';
+        const result = await db.query<UserDataRow>(query, [id])
+
+        if (result.rows.length === 0) {
+            return null;
+        }
+
+        const userRow = result.rows[0]
+
+        const entity = UserMapper.toDomain(userRow)
+
+        return entity;
+    }
+
     public async save(entity: UserEntity): Promise<UserEntity> {
         const query = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *';
 
@@ -39,4 +54,6 @@ export class IUserRerpository implements UserRepository {
 
         return UserMapper.toDomain(result.rows[0]);
     }
+
+    
 }

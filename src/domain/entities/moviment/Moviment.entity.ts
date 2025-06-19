@@ -1,6 +1,6 @@
 import { DomainInvalidValueException } from '../../exceptions/Domain-invalid-values.exception';
 import { Description } from '../../value-objects/Description.vo';
-import { Title } from '../../value-objects/Title.VO';
+import { Title } from '../../value-objects/Title.vo';
 import { Entity } from '../Entity';
 
 // Enumerate mais performnatico
@@ -21,14 +21,13 @@ export type TypesMoviment = (typeof TypesMov)[keyof typeof TypesMov];
 export type IsFixedTypeMoviment = (typeof IsFixedTypeMov)[keyof typeof IsFixedTypeMov];
 
 export type MovimentProps = {
-    id: number;
     title: Title; // criar um value opbject
     short_description: Description; // criar um value object
     value: number;
     is_fixed: string;
     type: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: Date;
+    updated_at?: Date;
     user_id: number;
     category_id: number;
 };
@@ -77,8 +76,28 @@ export class MovimentEntity extends Entity<MovimentProps> {
         return this.props.value;
     }
 
-    public changeTitle() {
+    get is_fixed(): string {
+        return this.props.is_fixed;
+    }
 
+    get type(): string {
+        return this.props.type;
+    }
+
+    get createdAt(): Date {
+        return this.props.created_at!;
+    }
+
+    get updatedAt(): Date {
+        return this.props.updated_at!;
+    }
+
+    get user_id(): number {
+        return this.props.user_id;
+    }
+
+    get category_id(): number {
+        return this.props.category_id;
     }
 
     private static validateType(type: string): boolean {
