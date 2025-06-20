@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import userRouter from './routes/users/user.routes';
+import movimentRouter from './routes/moviments/moviment.routes';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 app.use('/users', userRouter);
+app.use('/moviments', movimentRouter);
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.send(error.message);

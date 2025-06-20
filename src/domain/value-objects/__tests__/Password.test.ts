@@ -1,4 +1,4 @@
-import { Password } from '../Password';
+import { Password } from '../Password.vo';
 
 describe('Password value-object tests', () => {
     it('Valid password value', () => {

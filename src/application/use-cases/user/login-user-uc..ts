@@ -44,15 +44,12 @@ export class LoginUserUC implements UseCaseContract<LoginUserInputDto, LoginUser
             throw new AutheticationFailedException('Invalid Credentials!');
         }
 
-        console.log(user);
-
         if (!user.id) {
             throw new AutheticationFailedException('Not found User id. Data integrity error!');
         }
 
         const verifyPassword = await user.verifyValidPassword(password, this.hashProvider);
 
-        console.log(verifyPassword);
         if (!verifyPassword) {
             throw new AutheticationFailedException('Invalid Credentials!');
         }

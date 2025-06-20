@@ -23,6 +23,6 @@ export class IMovimentRepository implements MovimentRepository {
 
         const result = await db.query<MovimentDataRow>(query, [entity.title, entity.short_description, entity.value, entity.is_fixed, entity.type, entity.user_id, entity.category_id]);
         
-        return  MovimentMapper.toDomain(result.rows[0]);
+        return MovimentMapper.toDomain(result.rows[0]);
     }
 }

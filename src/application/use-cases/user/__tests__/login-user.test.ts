@@ -3,8 +3,8 @@ import { UserRepository } from '../../../repositories/user.repository';
 import { AuthProvider } from '../../../providers/auth.provider';
 import { LoginUserUC } from '../login-user-uc.';
 import { UserEntity } from '../../../../domain/entities/users/User.entity';
-import { Email } from '../../../../domain/value-objects/Email';
-import { Password } from '../../../../domain/value-objects/Password';
+import { Email } from '../../../../domain/value-objects/Email.vo';
+import { Password } from '../../../../domain/value-objects/Password.vo';
 
 let mockHashProvider: jest.Mocked<HashProvider>;
 let mockUserRepository: jest.Mocked<UserRepository>;
@@ -28,6 +28,7 @@ describe('Login user usecase test', () => {
         mockUserRepository = {
             findByEmail: jest.fn(),
             save: jest.fn(),
+            findById: jest.fn(),
         };
 
         loginUserUc = LoginUserUC.create(mockAuthProvider, mockUserRepository, mockHashProvider);

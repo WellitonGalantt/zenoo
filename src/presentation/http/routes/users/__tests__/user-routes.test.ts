@@ -59,7 +59,7 @@ describe('User routes tests', () => {
         expect(response.body).not.toHaveProperty('password');
     });
 
-    it('POST /users/login : Sucessful ongin user', async () => {
+    it('POST /users/login : Sucessful longin user', async () => {
         const userData = {
             email: 'welliton@gmail.com',
             password: 'senhatop123',
@@ -67,9 +67,10 @@ describe('User routes tests', () => {
 
         const response = await request(app).post('/users/login').send(userData);
 
-        expect(response.status).toBe(500);
-        expect(response.body).toHaveProperty('message');
-        expect(response.body).not.toHaveProperty('id');
+        expect(response.status).toBe(201);
+        expect(response.body).not.toHaveProperty('message');
+        expect(response.body).toHaveProperty('user');
+        expect(response.body).toHaveProperty('token');
         expect(response.body).not.toHaveProperty('password');
     });
 });

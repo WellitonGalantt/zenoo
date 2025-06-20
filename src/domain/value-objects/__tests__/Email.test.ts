@@ -1,5 +1,5 @@
 import { DomainInvalidValueException } from '../../exceptions/Domain-invalid-values.exception';
-import { Email } from '../Email';
+import { Email } from '../Email.vo';
 
 describe('Email value-object test', () => {
     it('Cerate valid email', () => {

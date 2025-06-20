@@ -20,7 +20,7 @@ export class Description {
     }
 
     private static validade(description: string): boolean {
-        if (description.length <= 3 || description.length > 122) return false;
+        if (description.length <= 5 || description.length > 122) return false;
         return true;
     }
 }

@@ -64,6 +64,11 @@ export class MovimentEntity extends Entity<MovimentProps> {
         return new MovimentEntity(props, id);
     }
 
+    public static rehydrate(props: MovimentProps, id: number): MovimentEntity {
+        // Chamar sem verificações quando se sabe que os dados estao certos, por exemplo quando vem do banco de dados
+        return new MovimentEntity(props, id);
+    }
+
     get title(): string {
         return this.props.title.title;
     }

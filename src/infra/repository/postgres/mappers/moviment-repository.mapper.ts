@@ -6,7 +6,8 @@ import { MovimentDataRow } from "../moviment-repository.postgres";
 
 export class MovimentMapper {
     public static toDomain(data: MovimentDataRow): MovimentEntity {
-        return MovimentEntity.create(
+        // usamos o rehydrate para recriar o objeto sem verificações pois ja vem do banco de dados
+        return MovimentEntity.rehydrate(
             {
                 title: Title.create(data.title),
                 short_description: Description.create(data.short_description),
@@ -17,7 +18,8 @@ export class MovimentMapper {
                 updated_at: data.updated_at,
                 user_id: data.user_id,
                 category_id: data.category_id
-            }
+            },
+            data.id
         )
     }
 }

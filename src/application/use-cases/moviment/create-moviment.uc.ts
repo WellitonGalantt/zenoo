@@ -59,10 +59,12 @@ export class CreateMovimentUC implements UseCaseContract<CreateMovimentInputDto,
                 type,
                 user_id,
                 category_id
-            }
+            }, existUser.id
         );
 
-        return this.presentOutput(movimentEntity);
+        const newMoviment = await this.movimentRepository.save(movimentEntity);
+
+        return this.presentOutput(newMoviment);
 
     }
 

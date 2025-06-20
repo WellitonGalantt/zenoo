@@ -11,6 +11,7 @@ const userRouter = Router();
 const userRepository = new IUserRerpository();
 const hasher = new IHashProvider();
 const createUserUseCase = CreateUserUC.create(userRepository, hasher);
+
 const authProvider = new IAuthProvider();
 const loginUserUseCase = LoginUserUC.create(authProvider, userRepository, hasher);
 const controller = new UserController(createUserUseCase, loginUserUseCase);
