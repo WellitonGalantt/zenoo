@@ -57,9 +57,11 @@ export class MovimentEntity extends Entity<MovimentProps> {
             updated_at = new Date();
         }
 
-        if (!user_id) throw new DomainInvalidValueException('Invalid User! It is not possible to create without a user!');
+        if (!user_id)
+            throw new DomainInvalidValueException('Invalid User! It is not possible to create without a user!');
 
-        if (!category_id) throw new DomainInvalidValueException('Invalid Category! It is not possible to create without a category!');
+        if (!category_id)
+            throw new DomainInvalidValueException('Invalid Category! It is not possible to create without a category!');
 
         return new MovimentEntity(props, id);
     }

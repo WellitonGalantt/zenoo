@@ -1,5 +1,6 @@
 import { MovimentEntity } from '../../../../domain/entities/moviment/Moviment.entity';
 import { UserEntity } from '../../../../domain/entities/users/User.entity';
+import { DomainInvalidValueException } from '../../../../domain/exceptions/Domain-invalid-values.exception';
 import { Description } from '../../../../domain/value-objects/Description.vo';
 import { Title } from '../../../../domain/value-objects/Title.vo';
 import { MovimentRepository } from '../../../repositories/moviment.repository';
@@ -10,20 +11,19 @@ let movimentRepositoryMock: jest.Mocked<MovimentRepository>;
 let userRepositoryMock: jest.Mocked<UserRepository>;
 let createMovimentUC: CreateMovimentUC;
 
-
 describe('Create moviment usecase tests', () => {
-
     beforeEach(() => {
         jest.clearAllMocks();
 
         movimentRepositoryMock = {
-            save: jest.fn()
+            save: jest.fn(),
+            findAll: jest.fn(),
         };
 
         userRepositoryMock = {
             save: jest.fn(),
             findByEmail: jest.fn(),
-            findById: jest.fn()
+            findById: jest.fn(),
         };
 
         createMovimentUC = CreateMovimentUC.create(movimentRepositoryMock, userRepositoryMock);
@@ -36,7 +36,7 @@ describe('Create moviment usecase tests', () => {
         is_fixed: 's',
         type: 'ganho',
         user_id: 1,
-        category_id: 1
+        category_id: 1,
     };
 
     const mockUserEntity = {
@@ -52,14 +52,12 @@ describe('Create moviment usecase tests', () => {
         props: {
             ...input,
             title: Title.create(input.title),
-            short_description: Description.create(input.short_description)
+            short_description: Description.create(input.short_description),
         },
-        id: 1
+        id: 1,
     } as unknown as MovimentEntity;
 
     it('Sucesfull create moviment', async () => {
-        
-
         userRepositoryMock.findById.mockResolvedValue(mockUserEntity);
         movimentRepositoryMock.save.mockResolvedValue(mockMovimentEntity);
 
@@ -70,5 +68,14 @@ describe('Create moviment usecase tests', () => {
         expect(movimentRepositoryMock.save).toHaveBeenCalledWith(expect.any(MovimentEntity));
 
         expect(result).toHaveProperty('id');
+    });
+
+    it('Failed create moviment, not found user', async () => {
+        userRepositoryMock.findById.mockResolvedValue(null);
+
+        await expect(createMovimentUC.execute(input)).rejects.toThrow(DomainInvalidValueException);
+
+        expect(userRepositoryMock.findById).toHaveBeenCalledWith(input.user_id);
+        expect(movimentRepositoryMock.save).not.toHaveBeenCalled();
     });
 });

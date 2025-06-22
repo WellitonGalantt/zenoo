@@ -1,4 +1,4 @@
-import { DomainInvalidValueException } from "../exceptions/Domain-invalid-values.exception";
+import { DomainInvalidValueException } from '../exceptions/Domain-invalid-values.exception';
 
 export class Description {
     public readonly description: string;

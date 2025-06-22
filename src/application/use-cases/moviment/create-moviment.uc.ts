@@ -1,11 +1,10 @@
-import { UseCaseContract } from "../use-case.contract";
-import { MovimentRepository } from "../../repositories/moviment.repository";
-import { UserRepository } from "../../repositories/user.repository";
-import { DomainInvalidValueException } from "../../../domain/exceptions/Domain-invalid-values.exception";
-import { Title } from "../../../domain/value-objects/Title.vo";
-import { Description } from "../../../domain/value-objects/Description.vo";
-import { MovimentEntity } from "../../../domain/entities/moviment/Moviment.entity";
-
+import { UseCaseContract } from '../use-case.contract';
+import { MovimentRepository } from '../../repositories/moviment.repository';
+import { UserRepository } from '../../repositories/user.repository';
+import { DomainInvalidValueException } from '../../../domain/exceptions/Domain-invalid-values.exception';
+import { Title } from '../../../domain/value-objects/Title.vo';
+import { Description } from '../../../domain/value-objects/Description.vo';
+import { MovimentEntity } from '../../../domain/entities/moviment/Moviment.entity';
 
 export type CreateMovimentInputDto = {
     title: string;
@@ -15,11 +14,11 @@ export type CreateMovimentInputDto = {
     type: string;
     user_id: number;
     category_id: number;
-}
+};
 
 export type CreateMovimentUCOutputDto = {
     id: number;
-}
+};
 
 export class CreateMovimentUC implements UseCaseContract<CreateMovimentInputDto, CreateMovimentUCOutputDto> {
     private readonly movimentRepository: MovimentRepository;
@@ -58,14 +57,14 @@ export class CreateMovimentUC implements UseCaseContract<CreateMovimentInputDto,
                 is_fixed,
                 type,
                 user_id,
-                category_id
-            }, existUser.id
+                category_id,
+            },
+            existUser.id,
         );
 
         const newMoviment = await this.movimentRepository.save(movimentEntity);
 
         return this.presentOutput(newMoviment);
-
     }
 
     private presentOutput(entity: MovimentEntity): CreateMovimentUCOutputDto {

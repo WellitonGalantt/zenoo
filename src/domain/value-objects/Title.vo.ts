@@ -1,14 +1,13 @@
-import { DomainInvalidValueException } from "../exceptions/Domain-invalid-values.exception";
+import { DomainInvalidValueException } from '../exceptions/Domain-invalid-values.exception';
 
 export class Title {
-    public readonly title: string
+    public readonly title: string;
 
     private constructor(value: string) {
         this.title = value;
     }
 
     public static create(value: string): Title {
-
         if (!this.validade(value)) {
             throw new DomainInvalidValueException(
                 'Invalid Title! Title must be greater than 3 characters and minor than 24 characters.',

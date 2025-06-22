@@ -17,4 +17,4 @@ describe('Description value-object tests', () => {
             const description = Description.create(invalidDescription);
         }).toThrow(DomainInvalidValueException);
     });
-})
+});
