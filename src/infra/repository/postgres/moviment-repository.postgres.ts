@@ -41,4 +41,12 @@ export class IMovimentRepository implements MovimentRepository {
         const allMoviments = result.rows.map(MovimentMapper.toDomain);
         return allMoviments;
     }
+
+    async findById(movimnet_id: number, user_id:number): Promise<MovimentEntity> {
+        const query = `SELECT * FROM moviment WHERE id = $1 AND user_id = $2`;
+        const result = await db.query<MovimentDataRow>(query, [movimnet_id, user_id]);
+
+        const moviment = result.rows[0];
+        return MovimentMapper.toDomain(moviment);
+    }
 }

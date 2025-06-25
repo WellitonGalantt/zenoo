@@ -1,6 +1,6 @@
 import { MovimentEntity } from '../../../domain/entities/moviment/Moviment.entity';
-import { ListMovimentsInvalidMoviment } from '../../../domain/exceptions/List-Moviments-invalid-moviment.exception copy';
-import { ListMovimentsInvalidUser } from '../../../domain/exceptions/List-Moviments-invalid-user.exception';
+import { ListMovimentsInvalidMoviment } from '../../../domain/exceptions/Moviments-invalid-moviment.exception copy';
+import { MovimentsInvalidUser } from '../../../domain/exceptions/Moviments-invalid-user.exception';
 import { MovimentRepository } from '../../repositories/moviment.repository';
 import { UserRepository } from '../../repositories/user.repository';
 import { UseCaseContract } from '../use-case.contract';
@@ -38,7 +38,7 @@ export class ListMovimentUC implements UseCaseContract<ListMovimnetInputDto, Lis
         const existUser = await this.userRepository.findById(input.user_id);
 
         if (!existUser) {
-            throw new ListMovimentsInvalidUser('Invalid User! It is not possible to create without a user!');
+            throw new MovimentsInvalidUser('Invalid User! It is not possible to create without a user!');
         }
 
         // Enviando o id do usuario para pegar apenas do usuario logado;
