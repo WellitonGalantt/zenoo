@@ -1,4 +1,5 @@
 import { MovimentRepository } from '../../../application/repositories/moviment.repository';
+import { DeleteMovimentOutputDto } from '../../../application/use-cases/moviment/delete-moviment.uc';
 import { MovimentEntity } from '../../../domain/entities/moviment/Moviment.entity';
 import { db } from '../../db/postgres/database.postgres';
 import { MovimentMapper } from './mappers/moviment-repository.mapper';
@@ -42,11 +43,18 @@ export class IMovimentRepository implements MovimentRepository {
         return allMoviments;
     }
 
-    async findById(movimnet_id: number, user_id:number): Promise<MovimentEntity> {
+    async findById(movimnet_id: number, user_id: number): Promise<MovimentEntity> {
         const query = `SELECT * FROM moviment WHERE id = $1 AND user_id = $2`;
         const result = await db.query<MovimentDataRow>(query, [movimnet_id, user_id]);
 
         const moviment = result.rows[0];
         return MovimentMapper.toDomain(moviment);
+    }
+
+    async deleteByID(id: number, user_id: number): Promise<DeleteMovimentOutputDto> {
+        const query = 'DELETE FROM moviment WHERE id = $1 AND user_id = $2';
+        const result = await db.query(query, [id, user_id]);
+
+        return { rowCount: result.rowCount };
     }
 }
