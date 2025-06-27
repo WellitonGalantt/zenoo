@@ -1,6 +1,7 @@
 import { MovimentRepository } from '../../../application/repositories/moviment.repository';
 import { DeleteMovimentOutputDto } from '../../../application/use-cases/moviment/delete-moviment.uc';
 import { MovimentEntity } from '../../../domain/entities/moviment/Moviment.entity';
+import { UpdateMovimentError } from '../../../domain/exceptions/Moviments-invalid-user.exception';
 import { db } from '../../db/postgres/database.postgres';
 import { MovimentMapper } from './mappers/moviment-repository.mapper';
 
@@ -56,5 +57,23 @@ export class IMovimentRepository implements MovimentRepository {
         const result = await db.query(query, [id, user_id]);
 
         return { rowCount: result.rowCount };
+    }
+
+    async update(data: MovimentEntity): Promise<void> {
+        const query = `UPDATE moviment SET title = $1, short_description = $2, value = $3, is_fixed = $4, type = $5, category_id = $6 WHERE id = $7 AND user_id = $8`;
+        const result = await db.query(query, [
+            data.title,
+            data.short_description,
+            data.value,
+            data.is_fixed,
+            data.type,
+            data.category_id,
+            data.id,
+            data.user_id,
+        ])
+
+        if(!result.rowCount || result.rowCount <= 0 ) throw new UpdateMovimentError('Moviment not found!');
+
+        return;
     }
 }

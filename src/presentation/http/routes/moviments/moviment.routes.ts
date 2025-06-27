@@ -6,6 +6,7 @@ import { MovimentController } from '../../../controllers/moviments/moviment.cont
 import { ListMovimentUC } from '../../../../application/use-cases/moviment/list-moviments.uc';
 import { GetMovimentByIdUC } from '../../../../application/use-cases/moviment/get-movimentby-id.uc';
 import { DeleteMovimentByIdUc } from '../../../../application/use-cases/moviment/delete-moviment.uc';
+import { UpdateMovimentUC } from '../../../../application/use-cases/moviment/update-moviment.uc';
 
 const movimentRouter = require('express').Router();
 
@@ -16,13 +17,15 @@ const createMovimentUC = CreateMovimentUC.create(movimentRepository, userReposit
 const listMovimentUC = ListMovimentUC.create(movimentRepository, userRepository);
 const findByIdMovimentUC = GetMovimentByIdUC.create(movimentRepository, userRepository);
 const deleteMovimentByIdUC = DeleteMovimentByIdUc.create(movimentRepository, userRepository);
+const updateMovimentUC = UpdateMovimentUC.create(movimentRepository, userRepository);
 
 
 const controller = new MovimentController(
     createMovimentUC,
     listMovimentUC,
     findByIdMovimentUC,
-    deleteMovimentByIdUC
+    deleteMovimentByIdUC,
+    updateMovimentUC
 );
 
 movimentRouter.post('/', (req: Request, res: Response) => {
@@ -39,6 +42,10 @@ movimentRouter.get('/:id', (req: Request, res: Response) => {
 
 movimentRouter.delete('/:id', (req: Request, res: Response) => {
     controller.DeleteById(req, res);
+});
+
+movimentRouter.patch('/:id', (req: Request, res: Response) => {
+    controller.update(req, res);
 });
 
 export default movimentRouter;

@@ -3,6 +3,7 @@ import { CreateMovimentInputDto, CreateMovimentUC } from '../../../application/u
 import { GetMovimentByIDInputDto, GetMovimentByIdUC } from '../../../application/use-cases/moviment/get-movimentby-id.uc';
 import { ListMovimentUC, ListMovimnetInputDto } from '../../../application/use-cases/moviment/list-moviments.uc';
 import { DeleteMovimentByIdUc } from '../../../application/use-cases/moviment/delete-moviment.uc';
+import { UpdateMovimentInputDto, UpdateMovimentUC } from '../../../application/use-cases/moviment/update-moviment.uc';
 
 export class MovimentController {
     constructor(
@@ -10,7 +11,8 @@ export class MovimentController {
         private createMovimentUC: CreateMovimentUC,
         private listMovimentUC: ListMovimentUC,
         private getMovimentByIdUC: GetMovimentByIdUC,
-        private deleteMovimentByIdUC: DeleteMovimentByIdUc
+        private deleteMovimentByIdUC: DeleteMovimentByIdUc,
+        private updateMovimentUC: UpdateMovimentUC
     ) { }
 
     public async create(req: Request<{}, CreateMovimentInputDto>, res: Response): Promise<void> {
@@ -74,6 +76,26 @@ export class MovimentController {
             const result = await this.deleteMovimentByIdUC.execute({ id: movimentId, user_id: userId });
 
             res.status(201).json({ message: `Sucessful on delete moviment id: ${movimentId}` });
+            return;
+        }
+        catch (error) {
+            res.status(500).json({ message: `Internal server error: \n\n${error}` });
+            return;
+        }
+    }
+
+    public async update(req: Request<{ id?: number }, Omit<UpdateMovimentInputDto, 'id'>>, res: Response): Promise<void> {
+        try {
+            const body = req.body;
+            const id = req.params.id;
+            if (!id) {
+                res.status(400).json({ message: 'Moviment id is required' });
+                return;
+            };
+
+            const result = await this.updateMovimentUC.execute({ ...body, id: id });
+
+            res.status(201).json({message: `Sucessful on update moviment id: ${id}`});
             return;
         }
         catch (error) {

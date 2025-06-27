@@ -107,10 +107,48 @@ export class MovimentEntity extends Entity<MovimentProps> {
         return this.props.category_id;
     }
 
+    public updateTitle(newTitle: string): void {
+        if (this.props.title.equals(newTitle)) return;
+        
+        this.props.title = Title.create(newTitle);
+    }
+
+    public updateDescription(newDescription: string): void {
+        if (this.props.short_description.equals(newDescription)) return;
+        
+        this.props.short_description = Description.create(newDescription);
+    }
+
+    public updateValue(newValue: number): void {
+        if (this.props.value === newValue) return;
+        
+        this.props.value = newValue;
+    }
+
+    public updateIdFixed(newFixed: string): void {
+        if (this.props.is_fixed === newFixed) return;
+        if(!MovimentEntity.validateIsFixed(newFixed)) throw new DomainInvalidValueException('Invalid Is Fixed! Is Fixed must be "s" or "n".');
+        
+        this.props.is_fixed = newFixed;
+    }
+
+    public updateType(newType: string): void {
+        if (this.props.type === newType) return;
+        if(!MovimentEntity.validateType(newType)) throw new DomainInvalidValueException('Invalid Type! Type must be "ganho" or "gasto".');
+        
+        this.props.type = newType;
+    }
+
     private static validateType(type: string): boolean {
         // Validando o tipo de movimentacao
         // Verifica de contem o valor passado no enum ou nao, e retorna verdadeiro ou falso
         return Object.values(TypesMov).includes(type as TypesMoviment);
+    }
+
+    public updateCategory(newCategory: number): void {
+        if (this.props.category_id === newCategory) return;
+        
+        this.props.category_id = newCategory;
     }
 
     private static validateIsFixed(is_fixed: string): boolean {

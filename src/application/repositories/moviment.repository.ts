@@ -6,4 +6,5 @@ export interface MovimentRepository {
     findAll(user_id: number): Promise<MovimentEntity[]>;
     findById(id: number, user_id: number): Promise<MovimentEntity>;
     deleteByID(id: number, user_id: number): Promise<DeleteMovimentOutputDto>;
+    update(data: MovimentEntity): Promise<void>;
 }

@@ -1,6 +1,6 @@
-export class MovimentsInvalidUser extends Error {
+export class UpdateMovimentError extends Error {
     constructor(message: string) {
         super(message);
-        this.name = 'MovimentsInvalidUser';
+        this.name = 'UpdateMovimentError';
     }
 }
